@@ -30,4 +30,4 @@
       assert:
         that:
           - autofs_check_test_source.stat.exists
-      quiet: yes
+        quiet: yes

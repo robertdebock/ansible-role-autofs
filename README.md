@@ -66,7 +66,7 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
       assert:
         that:
           - autofs_check_test_source.stat.exists
-      quiet: yes
+        quiet: yes
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
