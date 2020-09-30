@@ -51,21 +51,15 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
                 - "fstype=bind"
 
   tasks:
-    - name: write test in automounted /bin/mount
-      file:
-        path: /bind/mount/test
-        state: touch
-        mode: "0644"
-
-    - name: record status of /bind/mount/test
+    - name: test /bind
       stat:
-        path: /mnt/test
-      register: autofs_check_test_source
+        path: /bind
+      register: autofs_test_bind
 
-    - name: check if /bind/mount/test exists
+    - name: check if /bind exists
       assert:
         that:
-          - autofs_check_test_source.stat.exists
+          - autofs_test_bind.stat.exists
         quiet: yes
 ```
 
