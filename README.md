@@ -48,7 +48,7 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
             - "fstype=bind"
           directories:
             - path: mount
-              server: ":/mnt
+              server: ":/mnt"
 
   tasks:
     - name: write in automounted /bin/mount
@@ -136,7 +136,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 
 |container|tags|
 |---------|----|
-|alpine|all|
 |debian|all|
 |el|7, 8|
 |fedora|all|
