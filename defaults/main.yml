@@ -1,0 +1,9 @@
+---
+# defaults file for autofs
+
+# Here you can configure automount mountpoints.
+# autofs_maps:
+#   - mountpoint: /home
+#     directories:
+#       - path: "*"
+#         server: "server.example.com/&"

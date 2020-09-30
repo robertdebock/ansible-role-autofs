@@ -1,0 +1,46 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - role: ansible-role-autofs
+      autofs_maps:
+        - mountpoint: /net
+          options:
+            - "--timeout=60"
+          directories:
+            - path: server
+              options:
+                - rw
+                - soft
+                - intr
+                - rsize=8192
+                - wsize=8192
+              server: "server.example.com:/"
+        - mountpoint: /home
+          directories:
+            - path: "*"
+              server: "server.example.com/&"
+        - mountpoint: /cifs
+          directories:
+            - path: data
+              options:
+                - fstype=cifs
+              server: "://server.example.com/sharename/"
+        - mountpoint: /fuse
+          directories:
+            - path: ftpserver
+              options:
+                - fstype=curl
+                - rw
+                - allow_others
+                - nodev
+                - nonempty
+                - noatime
+              server: ':ftp\://username\:password\@ftp.example.com'
+
+  tasks:
+    - name: check if connection still works
+      ping:

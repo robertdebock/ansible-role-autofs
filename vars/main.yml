@@ -1,0 +1,7 @@
+---
+# vars file for autofs
+
+autofs_packages:
+  - autofs
+
+autofs_service: autofs

@@ -1,0 +1,57 @@
+---
+# tasks file for autofs
+- name: include assert.yml
+  include_tasks: assert.yml
+
+- name: install autofs
+  package:
+    name: "{{ autofs_packages }}"
+    state: present
+
+- name: configure auto.master
+  lineinfile:
+    path: /etc/auto.master
+    line: "{{ item.mountpoint }} /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}"
+    regexp: '^{{ item.mountpoint }}\s'
+    mode: "0644"
+  loop: "{{ autofs_maps }}"
+  loop_control:
+    label: "{{ item.mountpoint }}"
+  notify:
+    - restart autofs
+  when:
+    - autofs_maps is defined
+
+- name: configure maps
+  template:
+    src: map.j2
+    dest: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
+    mode: "0644"
+  loop: "{{ autofs_maps }}"
+  loop_control:
+    label: "{{ item.mountpoint }}"
+  notify:
+    - restart autofs
+  when:
+    - autofs_maps is defined
+
+- name: create mountpoints
+  file:
+    path: "{{ item.mountpoint }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop: "{{ autofs_maps }}"
+  loop_control:
+    label: "{{ item.mountpoint }}"
+  notify:
+    - restart autofs
+  when:
+    - autofs_maps is defined
+
+- name: start autofs
+  service:
+    name: "{{ autofs_service }}"
+    state: started
+    enabled: yes

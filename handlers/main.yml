@@ -1,0 +1,7 @@
+---
+# handlers file for autofs
+
+- name: restart autofs
+  service:
+    name: "{{ autofs_service }}"
+    state: restarted
