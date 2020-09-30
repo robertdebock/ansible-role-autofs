@@ -20,6 +20,8 @@
   loop: "{{ autofs_maps }}"
   loop_control:
     label: "{{ item.mountpoint }}"
+  when:
+    - autofs_maps is defined
 
 - name: test if options item in autofs_maps is set correctly
   assert:
@@ -31,4 +33,5 @@
   loop_control:
     label: "{{ item.mountpoint }}"
   when:
+    - autofs_maps is defined
     - item.options is defined
