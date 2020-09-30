@@ -43,43 +43,24 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
   roles:
     - role: robertdebock.autofs
       autofs_maps:
-        - mountpoint: /net
+        - mountpoint: /bind
           options:
-            - "--timeout=60"
+            - "fstype=bind"
           directories:
-            - path: server
-              options:
-                - rw
-                - soft
-                - intr
-                - rsize=8192
-                - wsize=8192
-              server: "server.example.com:/"
-        - mountpoint: /home
-          directories:
-            - path: "*"
-              server: "server.example.com/&"
-        - mountpoint: /cifs
-          directories:
-            - path: data
-              options:
-                - fstype=cifs
-              server: "://server.example.com/sharename/"
-        - mountpoint: /fuse
-          directories:
-            - path: ftpserver
-              options:
-                - fstype=curl
-                - rw
-                - allow_others
-                - nodev
-                - nonempty
-                - noatime
-              server: ':ftp\://username\:password\@ftp.example.com'
+            - path: mount
+              server: ":/mnt
 
   tasks:
-    - name: check if connection still works
-      ping:
+    - name: write in automounted /bin/mount
+      file:
+        path: /bind/mount/test
+        state: touch
+        mode: "0644"
+
+    - name: check if /bind/mount is a mountpoint
+      assert:
+        that:
+          - "'/bin/mount' in ansible_mounts"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -97,6 +78,36 @@ These variables are set in `defaults/main.yml`:
 #     directories:
 #       - path: "*"
 #         server: "server.example.com/&"
+#   - mountpoint: /net
+#     options:
+#       - "--timeout=60"
+#     directories:
+#       - path: server
+#         options:
+#           - rw
+#           - soft
+#           - intr
+#           - rsize=8192
+#           - wsize=8192
+#         server: "server.example.com:/"
+#   - mountpoint: /cifs
+#     directories:
+#       - path: data
+#         options:
+#           - fstype=cifs
+#         server: "://server.example.com/sharename/"
+#   - mountpoint: /fuse
+#     directories:
+#       - path: ftpserver
+#         options:
+#           - fstype=curl
+#           - rw
+#           - allow_others
+#           - nodev
+#           - nonempty
+#           - noatime
+#         server: ':ftp\://username\:password\@ftp.example.com'
+#
 ```
 
 ## [Requirements](#requirements)
