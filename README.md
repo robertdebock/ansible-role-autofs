@@ -4,7 +4,7 @@ Install and configure autofs on your system.
 
 |Travis|GitHub|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-autofs.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-autofs)|[![github](https://github.com/robertdebock/ansible-role-autofs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-autofs/actions)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/autofs)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/autofs)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-autofs.svg)](https://github.com/robertdebock/ansible-role-autofs/releases/)|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-autofs.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-autofs)|[![github](https://github.com/robertdebock/ansible-role-autofs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-autofs/actions)|[![quality](https://img.shields.io/ansible/quality/51020)](https://galaxy.ansible.com/robertdebock/autofs)|[![downloads](https://img.shields.io/ansible/role/d/51020)](https://galaxy.ansible.com/robertdebock/autofs)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-autofs.svg)](https://github.com/robertdebock/ansible-role-autofs/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -51,16 +51,22 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
               server: ":/mnt"
 
   tasks:
-    - name: write in automounted /bin/mount
+    - name: write test in automounted /bin/mount
       file:
         path: /bind/mount/test
         state: touch
         mode: "0644"
 
-    - name: check if /bind/mount is a mountpoint
+    - name: record status of /bind/mount/test
+      stat:
+        path: /mnt/test
+      register: autofs_check_test_source
+
+    - name: check if /bind/mount/test exists
       assert:
         that:
-          - "'/bin/mount' in ansible_mounts"
+          - autofs_check_test_source.stat.exists
+      quiet: yes
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.

@@ -15,13 +15,19 @@
               server: ":/mnt"
 
   tasks:
-    - name: write in automounted /bin/mount
+    - name: write test in automounted /bin/mount
       file:
         path: /bind/mount/test
         state: touch
         mode: "0644"
 
-    - name: check if /bind/mount is a mountpoint
+    - name: record status of /bind/mount/test
+      stat:
+        path: /mnt/test
+      register: autofs_check_test_source
+
+    - name: check if /bind/mount/test exists
       assert:
         that:
-          - "'/bin/mount' in ansible_mounts"
+          - autofs_check_test_source.stat.exists
+      quiet: yes
