@@ -8,11 +8,11 @@
     - role: ansible-role-autofs
       autofs_maps:
         - mountpoint: /bind
-          options:
-            - "fstype=bind"
           directories:
             - path: mount
               server: ":/mnt"
+              options:
+                - "fstype=bind"
 
   tasks:
     - name: write test in automounted /bin/mount

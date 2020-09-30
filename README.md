@@ -44,11 +44,11 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
     - role: robertdebock.autofs
       autofs_maps:
         - mountpoint: /bind
-          options:
-            - "fstype=bind"
           directories:
             - path: mount
               server: ":/mnt"
+              options:
+                - "fstype=bind"
 
   tasks:
     - name: write test in automounted /bin/mount
