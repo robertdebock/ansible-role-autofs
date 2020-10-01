@@ -8,6 +8,12 @@
     name: "{{ autofs_packages }}"
     state: present
 
+- name: ensure /etc/auto.master.d exists.
+  file:
+    path: /etc/auto.master.d
+    state: directory
+    mode: "0755"
+
 - name: enable /etc/auto.master.d/*.autofs inclusions
   lineinfile:
     path: /etc/auto.master
