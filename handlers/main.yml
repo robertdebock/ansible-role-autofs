@@ -5,3 +5,8 @@
   service:
     name: "{{ autofs_service }}"
     state: restarted
+
+- name: reload autofs
+  service:
+    name: "{{ autofs_service }}"
+    state: reloaded
