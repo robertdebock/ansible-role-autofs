@@ -49,6 +49,8 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
               server: ":/mnt"
               options:
                 - "fstype=bind"
+        - mountpoint: /do_not_exist
+          state: absent
 
   tasks:
     - name: test /bind
@@ -107,7 +109,8 @@ These variables are set in `defaults/main.yml`:
 #           - nonempty
 #           - noatime
 #         server: ':ftp\://username\:password\@ftp.example.com'
-#
+#   - mountpoint: /do_not_exist
+#     state: absent
 ```
 
 ## [Requirements](#requirements)
