@@ -1,0 +1,2 @@
+{{ ansible_managed | comment }}
+{{ item.mountpoint }} /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
