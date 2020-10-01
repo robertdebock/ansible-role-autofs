@@ -13,6 +13,8 @@
               server: ":/mnt"
               options:
                 - "fstype=bind"
+        - mountpoint: /do_not_exist
+          state: absent
 
   tasks:
     - name: test /bind

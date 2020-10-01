@@ -14,6 +14,7 @@
     line: "{{ item.mountpoint }} /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}"
     regexp: '^{{ item.mountpoint }}\s'
     mode: "0644"
+    state: "{{ item.state | default('present') }}"
   loop: "{{ autofs_maps }}"
   loop_control:
     label: "{{ item.mountpoint }}"
@@ -34,6 +35,19 @@
     - restart autofs
   when:
     - autofs_maps is defined
+    - item.state is not defined or (item.state is defined and item.state == "present")
+
+- name: cleanup maps that should not exist
+  file:
+    path: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
+    state: absent
+  loop: "{{ autofs_maps }}"
+  loop_control:
+    label: "{{ item.mountpoint }}"
+  when:
+    - autofs_maps is defined
+    - item.state is defined
+    - item.state == "absent"
 
 - name: create mountpoints
   file:
@@ -49,6 +63,7 @@
     - restart autofs
   when:
     - autofs_maps is defined
+    - item.state is not defined or (item.state is defined and item.state == "present")
 
 - name: start autofs
   service:

@@ -36,4 +36,5 @@
 #           - nonempty
 #           - noatime
 #         server: ':ftp\://username\:password\@ftp.example.com'
-#
+#   - mountpoint: /do_not_exist
+#     state: absent
