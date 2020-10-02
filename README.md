@@ -38,7 +38,7 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: no
+  gather_facts: yes
 
   roles:
     - role: robertdebock.autofs
