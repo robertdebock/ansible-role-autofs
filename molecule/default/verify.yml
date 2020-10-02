@@ -15,6 +15,7 @@
                 - "fstype=bind"
         - mountpoint: /do_not_exist
           state: absent
+      nis_master_map: auto.master
 
   tasks:
     - name: test /bind

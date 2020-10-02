@@ -50,3 +50,11 @@
     - autofs_maps is defined
     - item.options is defined
     - item.state is not defined or (item.state is defined and item.state == "present")
+
+- name: test if nis_master_map is set correctly
+  assert:
+    that:
+      - nis_master_map | length > 0
+    quiet: yes
+  when:
+    - nis_master_map is defined

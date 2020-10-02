@@ -51,6 +51,7 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
                 - "fstype=bind"
         - mountpoint: /do_not_exist
           state: absent
+      nis_master_map: auto.master
 
   tasks:
     - name: test /bind
@@ -111,6 +112,9 @@ These variables are set in `defaults/main.yml`:
 #         server: ':ftp\://username\:password\@ftp.example.com'
 #   - mountpoint: /do_not_exist
 #     state: absent
+
+# Set the nis_master_map.
+# nis_master_map: auto.master
 ```
 
 ## [Requirements](#requirements)
