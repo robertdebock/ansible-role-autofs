@@ -3,6 +3,11 @@
 - name: include assert.yml
   include_tasks: assert.yml
 
+- name: install requirements for autofs
+  package:
+    name: "{{ autofs_requirements }}"
+    state: present
+
 - name: install autofs
   package:
     name: "{{ autofs_packages }}"
