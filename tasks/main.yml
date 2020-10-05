@@ -63,11 +63,11 @@
 
 - name: cleanup autofs file that should not exist
   file:
-    path: /etc/auto.master.d/{{ item.mountpoint | regex_replace('/', '') }}.autofs
+    path: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
     state: absent
   loop: "{{ autofs_maps }}"
   loop_control:
-    label: /etc/auto.master.d/{{ item.mountpoint | regex_replace('/', '') }}.autofs
+    label: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
   notify:
     - reload autofs
   when:
