@@ -2,7 +2,6 @@
 - name: test if autofs_maps is set correctly
   assert:
     that:
-      - autofs_maps | length > 0
       - autofs_maps is iterable
     quiet: yes
   when:
@@ -12,9 +11,7 @@
   assert:
     that:
       - item.mountpoint is defined
-      - item.mountpoint | length > 0
       - item.directories is defined
-      - item.directories | length > 0
       - item.directories is iterable
     quiet: yes
   loop: "{{ autofs_maps }}"
@@ -28,7 +25,6 @@
   assert:
     that:
       - item.mountpoint is defined
-      - item.mountpoint | length > 0
     quiet: yes
   loop: "{{ autofs_maps }}"
   loop_control:
@@ -40,7 +36,6 @@
 - name: test if options item in autofs_maps is set correctly
   assert:
     that:
-      - item.options | length > 0
       - item.options is iterable
     quiet: yes
   loop: "{{ autofs_maps }}"
@@ -54,7 +49,6 @@
 - name: test if nis_master_map is set correctly
   assert:
     that:
-      - nis_master_map | length > 0
     quiet: yes
   when:
     - nis_master_map is defined
