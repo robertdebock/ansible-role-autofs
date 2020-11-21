@@ -18,13 +18,9 @@
       nis_master_map: auto.master
 
   tasks:
-    - name: test /bind
+    - name: check /bind
       stat:
         path: /bind
       register: autofs_test_bind
-
-    - name: check if /bind exists
-      assert:
-        that:
-          - autofs_test_bind.stat.exists
-        quiet: yes
+      failed_when:
+        - not autofs_test_bind.stat.exists
