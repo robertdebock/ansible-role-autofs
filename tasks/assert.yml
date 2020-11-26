@@ -1,4 +1,5 @@
 ---
+
 - name: test if autofs_maps is set correctly
   assert:
     that:
