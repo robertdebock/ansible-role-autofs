@@ -12,6 +12,7 @@
   assert:
     that:
       - item.mountpoint is defined
+      - item.mountpoint is string
       - item.directories is defined
       - item.directories is iterable
     quiet: yes
@@ -26,6 +27,7 @@
   assert:
     that:
       - item.mountpoint is defined
+      - item.mountpoint is string
     quiet: yes
   loop: "{{ autofs_maps }}"
   loop_control:
