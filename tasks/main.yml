@@ -38,71 +38,70 @@
   when:
     nis_master_map is defined
 
-- name: place autofs in /etc/auto.master.d/
-  template:
-    src: template.autofs.j2
-    dest: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
-    mode: "0640"
-  loop: "{{ autofs_maps }}"
-  loop_control:
-    label: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
-  notify:
-    - reload autofs
-  when:
-    - autofs_maps is defined
-    - item.state is not defined or (item.state is defined and item.state == "present")
+- name: configure autofs_maps
+  block:
+    - name: place autofs in /etc/auto.master.d/
+      template:
+        src: template.autofs.j2
+        dest: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
+        mode: "0640"
+      loop: "{{ autofs_maps }}"
+      loop_control:
+        label: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
+      notify:
+        - reload autofs
+      when:
+        - item.state is not defined or (item.state is defined and item.state == "present")
 
-- name: configure map
-  template:
-    src: map.j2
-    dest: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
-    mode: "0644"
-  loop: "{{ autofs_maps }}"
-  loop_control:
-    label: "{{ item.mountpoint }}"
-  when:
-    - autofs_maps is defined
-    - item.state is not defined or (item.state is defined and item.state == "present")
+    - name: configure map
+      template:
+        src: map.j2
+        dest: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
+        mode: "0644"
+      loop: "{{ autofs_maps }}"
+      loop_control:
+        label: "{{ item.mountpoint }}"
+      when:
+        - item.state is not defined or (item.state is defined and item.state == "present")
 
-- name: cleanup autofs file that should not exist
-  file:
-    path: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
-    state: absent
-  loop: "{{ autofs_maps }}"
-  loop_control:
-    label: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
-  notify:
-    - reload autofs
-  when:
-    - autofs_maps is defined
-    - item.state is defined
-    - item.state == "absent"
+    - name: cleanup autofs file that should not exist
+      file:
+        path: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
+        state: absent
+      loop: "{{ autofs_maps }}"
+      loop_control:
+        label: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('/', '') }}.autofs
+      notify:
+        - reload autofs
+      when:
+        - item.state is defined
+        - item.state == "absent"
 
-- name: cleanup maps that should not exist
-  file:
-    path: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
-    state: absent
-  loop: "{{ autofs_maps }}"
-  loop_control:
-    label: "/etc/auto.{{ item.mountpoint | regex_replace('/', '') }}"
-  when:
-    - autofs_maps is defined
-    - item.state is defined
-    - item.state == "absent"
+    - name: cleanup maps that should not exist
+      file:
+        path: /etc/auto.{{ item.mountpoint | regex_replace('/', '') }}
+        state: absent
+      loop: "{{ autofs_maps }}"
+      loop_control:
+        label: "/etc/auto.{{ item.mountpoint | regex_replace('/', '') }}"
+      when:
+        - item.state is defined
+        - item.state == "absent"
 
-- name: create mountpoints
-  file:
-    path: "{{ item.mountpoint }}"
-    state: directory
-    owner: root
-    group: root
-    mode: "0755"
-  loop: "{{ autofs_maps }}"
-  loop_control:
-    label: "{{ item.mountpoint }}"
+    - name: create mountpoints
+      file:
+        path: "{{ item.mountpoint }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+      loop: "{{ autofs_maps }}"
+      loop_control:
+        label: "{{ item.mountpoint }}"
+      when:
+        - item.state is not defined or (item.state is defined and item.state == "present")
   when:
     - autofs_maps is defined
-    - item.state is not defined or (item.state is defined and item.state == "present")
 
 - name: start autofs
   service:
