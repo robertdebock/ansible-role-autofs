@@ -8,6 +8,8 @@
     - role: ansible-role-autofs
       autofs_maps:
         - mountpoint: /bind
+          options:
+            - "--timeout=60"
           directories:
             - path: mount
               server: ":/mnt"
