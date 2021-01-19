@@ -1,6 +1,9 @@
 ---
 # defaults file for autofs
 
+# The first slash in a path will be removed, all remaining slashes will be replaced with this character.
+slash_replace_char: ""
+
 # Here you can configure automount mountpoints.
 # autofs_maps:
 #   - mountpoint: /home
