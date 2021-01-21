@@ -41,6 +41,11 @@ These variables are set in `defaults/main.yml`:
 ---
 # defaults file for autofs
 
+# The first slash in a path will be removed, all remaining slashes will be replaced with this character.
+#   Example: mountpoint=/bin/mount & slash_replace_char="-"
+#   Output file name: /etc/auto.bind-mount (leading slash removed, remaining replaced with "-")
+slash_replace_char: ""
+
 # Here you can configure automount mountpoints.
 # autofs_maps:
 #   - mountpoint: /home
@@ -135,6 +140,11 @@ If you find issues, please register them in [GitHub](https://github.com/robertde
 
 Apache-2.0
 
+## [Contributors](#contributors)
+
+I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
+
+- [citnfm](https://github.com/citnfm)
 
 ## [Author Information](#author-information)
 
