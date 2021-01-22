@@ -18,6 +18,18 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
 
   roles:
     - role: robertdebock.autofs
+      autofs_maps:
+        - mountpoint: /bind/mnt
+          options:
+            - "--timeout 60"
+          directories:
+            - path: mount
+              server: ":/mnt"
+              options:
+                - "fstype=bind"
+        - mountpoint: /do_not_exist
+          state: absent
+      nis_master_map: auto.master
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:

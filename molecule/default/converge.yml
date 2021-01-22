@@ -3,17 +3,15 @@
   hosts: all
   become: yes
   gather_facts: yes
-  vars_files:
-    - vars.yml
 
   roles:
     - role: ansible-role-autofs
       autofs_maps:
-        - mountpoint: "{{ mountpoint }}"
+        - mountpoint: /bind/mnt
           options:
             - "--timeout 60"
           directories:
-            - path: "{{ path }}"
+            - path: mount
               server: ":/mnt"
               options:
                 - "fstype=bind"
