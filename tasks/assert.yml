@@ -1,5 +1,13 @@
 ---
 
+- name: test if slash_replace_char is set correctly
+  assert:
+    that:
+      - slash_replace_char is defined
+      - slash_replace_char is string
+      - slash_replace_char | length in [ 0, 1 ]
+    quiet: yes
+
 - name: test if autofs_maps is set correctly
   assert:
     that:
