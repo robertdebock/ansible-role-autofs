@@ -3,26 +3,13 @@
   hosts: all
   become: yes
   gather_facts: yes
-
-  roles:
-    - role: ansible-role-autofs
-      autofs_maps:
-        - mountpoint: /bind
-          options:
-            - "--timeout=60"
-          directories:
-            - path: mount
-              server: ":/mnt"
-              options:
-                - "fstype=bind"
-        - mountpoint: /do_not_exist
-          state: absent
-      nis_master_map: auto.master
+  vars_files:
+    - vars.yml
 
   tasks:
-    - name: check /bind
+    - name: check that the path is available at the mountpoint
       stat:
-        path: /bind
+        path: "{{ mountpoint }}/{{ path }}"
       register: autofs_test_bind
       failed_when:
         - not autofs_test_bind.stat.exists
