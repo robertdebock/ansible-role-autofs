@@ -7,7 +7,10 @@
   tasks:
     - name: check that the path is available at the mountpoint
       stat:
-        path: /bind/mnt/mount
+        path: "{{ item }}"
       register: autofs_test_bind
       failed_when:
         - not autofs_test_bind.stat.exists
+      loop:
+        - /bind/mnt/mount
+        - /bind/direct/mount
