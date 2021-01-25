@@ -24,7 +24,8 @@ slash_replace_char: ""
 #           - rsize=8192
 #           - wsize=8192
 #         server: "server.example.com:/"
-#   - mountpoint: /cifs
+#   - name: cifs-mounts  # optionally name the map (for use in files names).
+#     mountpoint: /cifs
 #     directories:
 #       - path: data
 #         options:
