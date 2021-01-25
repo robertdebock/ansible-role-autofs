@@ -15,7 +15,8 @@
               server: ":/mnt"
               options:
                 - "fstype=bind"
-        - mountpoint: /-
+        - name: direct-mounts
+          mountpoint: /-
           options:
             - "--timeout 60"
             - "--ghost"
