@@ -101,6 +101,7 @@
         label: "{{ item.mountpoint }}"
       when:
         - item.state is not defined or (item.state is defined and item.state == "present")
+        - item.mountpoint != "/-"
   when:
     - autofs_maps is defined
 
