@@ -7,30 +7,30 @@
   delegate_to: localhost
 
 - name: install requirements for autofs
-  package:
+  ansible.builtin.package:
     name: "{{ autofs_requirements }}"
     state: present
 
 - name: install autofs
-  package:
+  ansible.builtin.package:
     name: "{{ autofs_packages }}"
     state: present
 
 - name: ensure /etc/auto.master.d exists.
-  file:
+  ansible.builtin.file:
     path: /etc/auto.master.d
     state: directory
     mode: "0755"
 
 - name: enable /etc/auto.master.d/*.autofs inclusions
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/auto.master
     line: '+dir:/etc/auto.master.d'
   notify:
     - restart autofs
 
 - name: place the nis_master_map line in /etc/auto.master
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/auto.master
     line: "+{{ nis_master_map }}"
     regexp: '^#\s*[+]{{ nis_master_map }}'
@@ -105,7 +105,7 @@
     - autofs_maps is defined
 
 - name: start autofs
-  service:
+  ansible.builtin.service:
     name: "{{ autofs_service }}"
     state: started
     enabled: yes

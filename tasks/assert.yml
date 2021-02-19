@@ -1,7 +1,7 @@
 ---
 
 - name: test if slash_replace_char is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - slash_replace_char is defined
       - slash_replace_char is string
@@ -9,7 +9,7 @@
     quiet: yes
 
 - name: test if autofs_maps is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - autofs_maps is iterable
     quiet: yes
@@ -17,7 +17,7 @@
     - autofs_maps is defined
 
 - name: test if item in autofs_maps is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.mountpoint is defined
       - item.mountpoint is string
@@ -32,7 +32,7 @@
     - item.state is undefined or (item.state is defined and item.state == "present")
 
 - name: test if item in autofs_maps is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.mountpoint is defined
       - item.mountpoint is string
@@ -45,7 +45,7 @@
     - item.state is defined and item.state == "absent"
 
 - name: test if options item in autofs_maps is set correctly
-  assert:
+  ansible.builtin.assert:
     that:
       - item.options is iterable
     quiet: yes
