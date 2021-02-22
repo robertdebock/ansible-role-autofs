@@ -42,7 +42,7 @@
 - name: configure autofs_maps
   block:
     - name: place autofs in /etc/auto.master.d/
-      template:
+      ansible.builtin.template:
         src: template.autofs.j2
         dest: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
         mode: "0640"
@@ -55,7 +55,7 @@
         - item.state is not defined or (item.state is defined and item.state == "present")
 
     - name: configure map
-      template:
+      ansible.builtin.template:
         src: map.j2
         dest: /etc/auto.{{ item.mountpoint | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}
         mode: "0644"
@@ -66,7 +66,7 @@
         - item.state is not defined or (item.state is defined and item.state == "present")
 
     - name: cleanup autofs file that should not exist
-      file:
+      ansible.builtin.file:
         path: /etc/auto.master.d/00-{{ item.mountpoint | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
         state: absent
       loop: "{{ autofs_maps }}"
@@ -79,7 +79,7 @@
         - item.state == "absent"
 
     - name: cleanup maps that should not exist
-      file:
+      ansible.builtin.file:
         path: /etc/auto.{{ item.mountpoint | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}
         state: absent
       loop: "{{ autofs_maps }}"
@@ -90,7 +90,7 @@
         - item.state == "absent"
 
     - name: create mountpoints
-      file:
+      ansible.builtin.file:
         path: "{{ item.mountpoint }}"
         state: directory
         owner: root
