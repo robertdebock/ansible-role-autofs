@@ -6,7 +6,7 @@
 
   tasks:
     - name: check that the path is available at the mountpoint
-      stat:
+      ansible.builtin.stat:
         path: "{{ item }}"
       register: autofs_test_bind
       failed_when:
