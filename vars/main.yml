@@ -10,5 +10,6 @@ autofs_requirements: "{{ _autofs_requirements[ansible_os_family] | default(_auto
 
 autofs_packages:
   - autofs
+  - nfs-utils
 
 autofs_service: autofs
