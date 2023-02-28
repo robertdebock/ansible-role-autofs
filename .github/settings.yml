@@ -5,4 +5,4 @@
 repository:
   description: Install and configure autofs on your system.
   homepage: https://robertdebock.nl/
-  topics: autofs, ansible, molecule, tox, playbook, hacktoberfest
+  topics: autofs, ansible, molecule, tox, playbook
