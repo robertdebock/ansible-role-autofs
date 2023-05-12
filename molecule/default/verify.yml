@@ -5,7 +5,7 @@
   gather_facts: yes
 
   tasks:
-    - name: check that the path is available at the mountpoint
+    - name: Check that the path is available at the mountpoint
       ansible.builtin.stat:
         path: "{{ item }}"
       register: autofs_test_bind
