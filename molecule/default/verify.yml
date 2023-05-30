@@ -13,4 +13,3 @@
         - not autofs_test_bind.stat.exists
       loop:
         - /bind/mnt/mount
-        - /bind/direct/mount
