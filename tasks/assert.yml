@@ -1,5 +1,6 @@
 ---
 
+# TODO: This variable should start with `autofs_`.
 - name: assert | Test if slash_replace_char is set correctly
   ansible.builtin.assert:
     that:
@@ -21,6 +22,7 @@
     that:
       - item.mountpoint is defined
       - item.mountpoint is string
+      - item.mountpoint is not none
       - item.directories is defined
       - item.directories is iterable
     quiet: yes
@@ -49,6 +51,7 @@
     that:
       - item.mountpoint is defined
       - item.mountpoint is string
+      - item.mountpoint is not none
     quiet: yes
   loop: "{{ autofs_maps }}"
   loop_control:
