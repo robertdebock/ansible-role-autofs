@@ -6,6 +6,8 @@
 #   Output file name: /etc/auto.bind-mount (leading slash removed, remaining replaced with "-")
 slash_replace_char: ""
 
+autofs_service_state: "started"
+
 # Here you can configure automount mountpoints.
 # autofs_maps:
 #   - mountpoint: /home
