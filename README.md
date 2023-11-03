@@ -2,9 +2,9 @@
 
 Install and configure autofs on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-autofs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-autofs/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-autofs/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-autofs)|[![quality](https://img.shields.io/ansible/quality/51020)](https://galaxy.ansible.com/robertdebock/autofs)|[![downloads](https://img.shields.io/ansible/role/d/51020)](https://galaxy.ansible.com/robertdebock/autofs)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-autofs.svg)](https://github.com/robertdebock/ansible-role-autofs/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-autofs/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-autofs/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-autofs/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-autofs)|[![downloads](https://img.shields.io/ansible/role/d/24444)](https://galaxy.ansible.com/robertdebock/autofs)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-autofs.svg)](https://github.com/robertdebock/ansible-role-autofs/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -151,7 +151,7 @@ The minimum version of Ansible required is 2.12, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-autofs/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-autofs/issues).
 
 ## [License](#license)
 
