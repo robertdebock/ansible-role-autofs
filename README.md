@@ -69,7 +69,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # The first slash in a path will be removed, all remaining slashes will be replaced with this character.
 #   Example: mountpoint=/bin/mount & slash_replace_char="-"
 #   Output file name: /etc/auto.bind-mount (leading slash removed, remaining replaced with "-")
-slash_replace_char: ""
+autofs_slash_replace_char: ""
 
 # Here you can configure automount mountpoints.
 # autofs_maps:

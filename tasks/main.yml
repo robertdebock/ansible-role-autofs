@@ -47,11 +47,11 @@
     - name: Place autofs in /etc/auto.master.d/
       ansible.builtin.template:
         src: template.autofs.j2
-        dest: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
+        dest: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}.autofs
         mode: "0640"
       loop: "{{ autofs_maps }}"
       loop_control:
-        label: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
+        label: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}.autofs
       notify:
         - Reload autofs
       when:

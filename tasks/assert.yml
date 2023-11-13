@@ -1,12 +1,12 @@
 ---
 
 # TODO: This variable should start with `autofs_`.
-- name: assert | Test slash_replace_char
+- name: assert | Test autofs_slash_replace_char
   ansible.builtin.assert:
     that:
-      - slash_replace_char is defined
-      - slash_replace_char is string
-      - slash_replace_char | length in [ 0, 1 ]
+      - autofs_slash_replace_char is defined
+      - autofs_slash_replace_char is string
+      - autofs_slash_replace_char | length in [ 0, 1 ]
     quiet: yes
 
 - name: assert | Test autofs_maps
