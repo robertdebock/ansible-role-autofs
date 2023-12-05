@@ -60,7 +60,7 @@
     - name: Configure map
       ansible.builtin.template:
         src: map.j2
-        dest: /etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}
+        dest: /etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}
         mode: "0644"
       loop: "{{ autofs_maps }}"
       loop_control:
@@ -72,11 +72,11 @@
 
     - name: Cleanup autofs file that should not exist
       ansible.builtin.file:
-        path: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
+        path: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}.autofs
         state: absent
       loop: "{{ autofs_maps }}"
       loop_control:
-        label: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}.autofs
+        label: /etc/auto.master.d/00-{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}.autofs
       notify:
         - Reload autofs
       when:
@@ -85,11 +85,11 @@
 
     - name: Cleanup maps that should not exist
       ansible.builtin.file:
-        path: /etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}
+        path: /etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}
         state: absent
       loop: "{{ autofs_maps }}"
       loop_control:
-        label: "/etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', slash_replace_char) }}"
+        label: "/etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', aufofs_slash_replace_char) }}"
       when:
         - item.state is defined
         - item.state == "absent"
