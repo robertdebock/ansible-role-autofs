@@ -89,7 +89,7 @@
         state: absent
       loop: "{{ autofs_maps }}"
       loop_control:
-        label: "/etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', aufofs_slash_replace_char) }}"
+        label: "/etc/auto.{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}"
       when:
         - item.state is defined
         - item.state == "absent"
