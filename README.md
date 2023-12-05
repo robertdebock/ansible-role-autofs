@@ -67,9 +67,12 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # defaults file for autofs
 
 # The first slash in a path will be removed, all remaining slashes will be replaced with this character.
-#   Example: mountpoint=/bind/mount & slash_replace_char="-"
+#   Example: mountpoint=/bind/mount & autofs_slash_replace_char="-"
 #   Output file name: /etc/auto.bind-mount (leading slash removed, remaining replaced with "-")
 autofs_slash_replace_char: "-"
+
+# In case you only want to configure, but not start autofs, set this to "stopped".
+autofs_service_state: "started"
 
 # Here you can configure automount mountpoints.
 # autofs_maps:

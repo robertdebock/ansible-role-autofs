@@ -72,3 +72,11 @@
     - autofs_maps is defined
     - item.options is defined
     - item.state is undefined or (item.state is defined and item.state == "present")
+
+- name: assert | Test autofs_service_state
+  ansible.builtin.assert:
+    that:
+      - autofs_service_state is defined
+      - autofs_service_state is string
+      - autofs_service_state in [ "started", "stopped" ]
+    quiet: yes
