@@ -111,5 +111,5 @@
 - name: Start autofs
   ansible.builtin.service:
     name: "{{ autofs_service }}"
-    state: started
+    state: "{{ autofs_service_state }}"
     enabled: yes
