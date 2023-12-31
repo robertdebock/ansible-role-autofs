@@ -23,6 +23,17 @@
       - item.mountpoint is defined
       - item.mountpoint is string
       - item.mountpoint is not none
+    quiet: yes
+  loop: "{{ autofs_maps }}"
+  loop_control:
+    label: "{{ item.mountpoint }}"
+  when:
+    - autofs_maps is defined
+    - item.state is undefined or (item.state is defined and item.state == "present")
+
+- name: assert | Test directories defined when not using builtin map
+  ansible.builtin.assert:
+    that:
       - item.directories is defined
       - item.directories is iterable
     quiet: yes
@@ -32,6 +43,7 @@
   when:
     - autofs_maps is defined
     - item.state is undefined or (item.state is defined and item.state == "present")
+    - item.options is defined and ("-hosts" not in item.options and "-null" not in item.options)
 
 - name: assert | Test item name in autofs_maps
   ansible.builtin.assert:

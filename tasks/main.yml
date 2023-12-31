@@ -68,7 +68,8 @@
       notify:
         - Reload autofs
       when:
-        - item.state is not defined or (item.state is defined and item.state == "present")
+        - (item.state is not defined or (item.state is defined and item.state == "present"))
+        - item.options is defined and ("-hosts" not in item.options and "-null" not in item.options)
 
     - name: Cleanup autofs file that should not exist
       ansible.builtin.file:
