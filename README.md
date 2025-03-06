@@ -18,7 +18,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   gather_facts: true
 
   roles:
-    - role: robertdebock.autofs
+    - role: ansible-role-autofs
       autofs_maps:
         - mountpoint: /bind/mnt
           options:
