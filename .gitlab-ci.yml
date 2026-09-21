@@ -29,8 +29,6 @@ molecule:
         tag: "latest"
       - image: "fedora"
         tag: "latest"
-      - image: "fedora"
-        tag: "40"
       - image: "ubuntu"
         tag: "jammy"
       - image: "ubuntu"
