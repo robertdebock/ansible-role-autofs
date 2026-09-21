@@ -12,9 +12,7 @@ galaxy_info:
         - Candidate
     - name: Debian
       versions:
-        - bullseye
-        - bookworm
-        - trixie
+        - all
     - name: EL
       versions:
         - '9'
