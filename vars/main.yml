@@ -12,3 +12,7 @@ autofs_packages:
   - autofs
 
 autofs_service: autofs
+
+# The name used in file names for a map: the name (or the mountpoint) without the leading slash and with the other
+# slashes replaced. This uses the loop variable `item`, so it can only be used inside a loop over autofs_maps.
+_autofs_map_name: "{{ item.name | default(item.mountpoint) | regex_replace('^/', '') | regex_replace('/', autofs_slash_replace_char) }}"
